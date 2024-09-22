@@ -1,0 +1,23 @@
+package Module2;
+
+
+
+public class BankAcc {
+    private double balance = 0;
+
+    public BankAcc(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    public void withdrawal(double amount) {
+        balance -= amount;
+        System.out.println("$" + amount + " has been withdrawn");
+    }
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("deposited amount of $" + amount);
+    }
+    public double get_balance() {
+        return balance;
+    }
+}
