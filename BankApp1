@@ -1,0 +1,59 @@
+package Module2;
+
+import javax.swing.*;
+import java.awt.event.*;
+
+public class BankApp extends JFrame implements ActionListener {
+    private JPanel panel;
+    private JButton depositButton, withdrawButton;
+    private JTextField displayBalance, userinput;
+    private BankAcc account;
+
+    public BankApp() {
+
+        String initialBalanceStr = JOptionPane.showInputDialog(this, "Enter Starting Balance:");
+        double initialBalance = Double.parseDouble(initialBalanceStr);
+
+        account = new BankAcc(initialBalance);
+
+        panel = new JPanel();
+        depositButton = new JButton("Deposit");
+        withdrawButton = new JButton("Withdraw");
+        displayBalance = new JTextField("Balance: " + account.get_balance(), 15);
+        userinput = new JTextField(15);
+
+        panel.add(displayBalance);
+        panel.add(depositButton);
+        panel.add(withdrawButton);
+        panel.add(userinput);
+
+        depositButton.addActionListener(this);
+        withdrawButton.addActionListener(this);
+
+        add(panel);
+
+        setTitle("Bank Account App");
+        setSize(500,330);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        double amount = Double.parseDouble(userinput.getText());
+
+        if (e.getSource() ==depositButton) {
+            account.deposit(amount);
+        } else if (e.getSource() == withdrawButton) {
+            account.withdrawal(amount);
+        }
+
+        displayBalance.setText("Balance: " + account.get_balance());
+
+    }
+    public static void main(String[] args) {
+        new BankApp();
+    }
+}
+
+
